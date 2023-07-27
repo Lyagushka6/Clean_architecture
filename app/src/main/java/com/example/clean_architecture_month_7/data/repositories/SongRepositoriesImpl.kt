@@ -8,7 +8,7 @@ class SongRepositoriesImpl(
     private val songDao: SongDao,
 ) : SongRepository {
 
-    override fun getSong(): List<Song> = songDao//.//getSong()
+    override fun getSong(): List<Song> = songDao.getSong()
 
     override fun createSong(song: Song) = songDao.createSong(song)
 
