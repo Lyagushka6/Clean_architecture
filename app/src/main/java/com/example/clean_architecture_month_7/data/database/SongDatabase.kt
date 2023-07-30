@@ -5,7 +5,7 @@ import com.example.clean_architecture_month_7.data.database.dao.SongDao
 import com.example.clean_architecture_month_7.data.models.Song
 
 @Database(entities = [Song::class], [], 1)
-abstract class RoomDatabase {
+abstract class SongDatabase {
 
     abstract fun getSongDao(): SongDao
 }

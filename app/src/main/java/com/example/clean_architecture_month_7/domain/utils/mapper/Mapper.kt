@@ -1,4 +1,4 @@
-package com.example.clean_architecture_month_7.domain.mapper
+package com.example.clean_architecture_month_7.domain.utils.mapper
 
 import com.example.clean_architecture_month_7.data.models.Song
 import com.example.clean_architecture_month_7.domain.models.SongEntity
