@@ -4,9 +4,9 @@ import com.example.clean_architecture_month_7.data.models.Song
 import com.example.clean_architecture_month_7.domain.repositories.SongRepository
 import javax.inject.Inject
 
-class CreateSongUseCase @Inject constructor(
+class DeleteSongUseCase @Inject constructor(
     private val songRepository: SongRepository
 ) {
 
-    fun createSong(song: Song) = songRepository.createSong(song)
+    fun deleteSong(song: Song) = songRepository.deleteSong(song)
 }
