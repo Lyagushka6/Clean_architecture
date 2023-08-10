@@ -1,19 +1,12 @@
 package com.example.clean_architecture_month_7.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import com.example.clean_architecture_month_7.data.models.Song
-import com.example.clean_architecture_month_7.presentation.utils.UiState
+import com.example.clean_architecture_month_7.presentation.base.BaseActivity
 import com.example.cleanarchitecturemonth7.R
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : BaseActivity() {
 
     private val viewModel by viewModels<SongViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,25 +18,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getSongs() {
         viewModel.getAllSong()
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.getAllSongs.collect {
-                    when(it){
-                        is UiState.Loading -> {
-                            print("Progress bar")
-                        }
-                        is UiState.Error ->{
-                            Toast.makeText(this@MainActivity, it.message, Toast.LENGTH_SHORT).show()
-                        }
-                        is UiState.Empty -> {
-                            print("empty")
-                        }
-                        is UiState.Success -> {
-                            print("show data")
-                        }
-                    }
-                }
-            }
-        }
+        viewModel.getAllSongs.collectInfo(
+            loadingState = { println("progress bar") },
+            errorState = { println("error") },
+            emptyState = { println("empty: $it") },
+            successState = { println("data: $it") }
+        )
     }
 }
